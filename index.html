@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeoTech — Магазин электроники</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav class="nav">
+    <div class="logo">Neo⚡Tech</div>
+    <ul class="nav-links">
+      <li><a href="#">Каталог</a></li>
+      <li><a href="#">Акции</a></li>
+      <li><a href="#">Бренды</a></li>
+      <li><a href="#">Контакты</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-cart" onclick="openCart()">
+        🛒 Корзина <span class="cart-badge" id="cnt">0</span>
+      </button>
+      <button class="hamburger" onclick="showToast('📋 Каталог · Акции · Бренды · Контакты')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div>
+  <div class="hero-content">
+    <div class="hero-pill"><span class="pill-dot"></span>🔥 Распродажа — до −50%</div>
+    <h1>Лучшая<br><span class="g1">электроника</span><br><span class="g2">вашей жизни</span></h1>
+    <p class="hero-desc">Смартфоны, ноутбуки, гаджеты. Оригинальная техника с доставкой по всему Казахстану.</p>
+    <div class="hero-btns">
+      <button class="btn-main" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Смотреть каталог</button>
+      <button class="btn-ghost" onclick="showToast('📦 Акции обновляются каждую пятницу!')">Все акции →</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="num">12K+</div><div class="lbl">товаров</div></div>
+      <div class="hstat"><div class="num">98%</div><div class="lbl">довольных</div></div>
+      <div class="hstat"><div class="num">1–2</div><div class="lbl">дня доставки</div></div>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <div class="hero-emoji">📱</div>
+  </div>
+</div>
+
+<!-- BRANDS -->
+<section>
+  <div class="sec-head"><h2 class="sec-title">Популярные бренды</h2></div>
+  <div class="brands-row">
+    <div class="bc" onclick="showToast('Samsung — 284 товара')">📱 Samsung</div>
+    <div class="bc" onclick="showToast('Apple — 196 товаров')"> Apple</div>
+    <div class="bc" onclick="showToast('Sony — 142 товара')">🎧 Sony</div>
+    <div class="bc" onclick="showToast('Xiaomi — 310 товаров')">📡 Xiaomi</div>
+    <div class="bc" onclick="showToast('JBL — 88 товаров')">🔊 JBL</div>
+    <div class="bc" onclick="showToast('ASUS — 76 товаров')">💻 ASUS</div>
+    <div class="bc" onclick="showToast('Huawei — 95 товаров')">🌐 Huawei</div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section>
+  <div class="sec-head"><h2 class="sec-title">Категории</h2><p class="sec-sub">Найдите нужное быстро</p></div>
+  <div class="cats">
+    <div class="cat" onclick="showToast('📱 Смартфоны — 284 товара')">
+      <div class="cat-ico" style="background:#fff5ee">📱</div>
+      <div class="cat-nm">Смартфоны</div><div class="cat-cnt">284 товара</div>
+    </div>
+    <div class="cat" onclick="showToast('💻 Ноутбуки — 156 товаров')">
+      <div class="cat-ico" style="background:#fdf0f8">💻</div>
+      <div class="cat-nm">Ноутбуки</div><div class="cat-cnt">156 товаров</div>
+    </div>
+    <div class="cat" onclick="showToast('🎧 Наушники — 320 товаров')">
+      <div class="cat-ico" style="background:#f5f0ff">🎧</div>
+      <div class="cat-nm">Наушники</div><div class="cat-cnt">320 товаров</div>
+    </div>
+    <div class="cat" onclick="showToast('📟 Планшеты — 98 товаров')">
+      <div class="cat-ico" style="background:#f0fcff">📟</div>
+      <div class="cat-nm">Планшеты</div><div class="cat-cnt">98 товаров</div>
+    </div>
+    <div class="cat" onclick="showToast('⌚ Умные часы — 77 товаров')">
+      <div class="cat-ico" style="background:#f0fff8">⌚</div>
+      <div class="cat-nm">Умные часы</div><div class="cat-cnt">77 товаров</div>
+    </div>
+    <div class="cat" onclick="showToast('🔌 Аксессуары — 512 товаров')">
+      <div class="cat-ico" style="background:#fffdf0">🔌</div>
+      <div class="cat-nm">Аксессуары</div><div class="cat-cnt">512 товаров</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="catalog">
+  <div class="sec-head"><h2 class="sec-title">🔥 Хиты продаж</h2><p class="sec-sub">Самое популярное этой недели</p></div>
+  <div class="products">
+
+    <div class="pcard po">
+      <div class="pimg" style="background:linear-gradient(135deg,#fff5ee,#ffe0cc)">
+        <span class="pbadge hot">HOT</span>
+        <button class="pfav" onclick="fav(this)">🤍</button>
+        <span style="filter:drop-shadow(0 4px 16px rgba(255,107,0,.4))">📱</span>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">Samsung</div>
+        <div class="pname">Galaxy S25 Ultra 512GB</div>
+        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.9 (1.2k)</span></div>
+        <div class="pfoot">
+          <div class="pprice"><span class="old">129 990 ₸</span>119 990 ₸</div>
+          <button class="btn-add" onclick="add(this,'Galaxy S25 Ultra')">В корзину</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard pp">
+      <div class="pimg" style="background:linear-gradient(135deg,#fff0f7,#ffd0e8)">
+        <span class="pbadge newb">NEW</span>
+        <button class="pfav" onclick="fav(this)">🤍</button>
+        <span style="filter:drop-shadow(0 4px 16px rgba(255,45,120,.4))">💻</span>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">Apple</div>
+        <div class="pname">MacBook Air M4 13" 16GB</div>
+        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">5.0 (876)</span></div>
+        <div class="pfoot">
+          <div class="pprice">189 990 ₸</div>
+          <button class="btn-add" onclick="add(this,'MacBook Air M4')">В корзину</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard pv">
+      <div class="pimg" style="background:linear-gradient(135deg,#f5f0ff,#e0d0ff)">
+        <span class="pbadge sale">−20%</span>
+        <button class="pfav" onclick="fav(this)">🤍</button>
+        <span style="filter:drop-shadow(0 4px 16px rgba(124,58,237,.45))">🎧</span>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">Sony</div>
+        <div class="pname">WH-1000XM6 Wireless</div>
+        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.8 (3.4k)</span></div>
+        <div class="pfoot">
+          <div class="pprice"><span class="old">89 990 ₸</span>71 990 ₸</div>
+          <button class="btn-add" onclick="add(this,'Sony WH-1000XM6')">В корзину</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard pc">
+      <div class="pimg" style="background:linear-gradient(135deg,#f0fcff,#c8f4ff)">
+        <button class="pfav" onclick="fav(this)">🤍</button>
+        <span style="filter:drop-shadow(0 4px 16px rgba(0,200,224,.5))">⌚</span>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">Apple</div>
+        <div class="pname">Watch Ultra 3 Titanium</div>
+        <div class="prating"><span class="stars">★★★★☆</span><span class="rnum">4.7 (654)</span></div>
+        <div class="pfoot">
+          <div class="pprice">149 990 ₸</div>
+          <button class="btn-add" onclick="add(this,'Apple Watch Ultra 3')">В корзину</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard py">
+      <div class="pimg" style="background:linear-gradient(135deg,#fff8e0,#ffeda0)">
+        <span class="pbadge hot">HOT</span>
+        <button class="pfav" onclick="fav(this)">🤍</button>
+        <span style="filter:drop-shadow(0 4px 16px rgba(255,208,0,.6))">🎮</span>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">PlayStation</div>
+        <div class="pname">PS5 Pro 2TB Digital Ed.</div>
+        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.9 (2.1k)</span></div>
+        <div class="pfoot">
+          <div class="pprice">239 990 ₸</div>
+          <button class="btn-add" onclick="add(this,'PS5 Pro')">В корзину</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard pg">
+      <div class="pimg" style="background:linear-gradient(135deg,#f0fff8,#c8ffe8)">
+        <span class="pbadge newb">NEW</span>
+        <button class="pfav" onclick="fav(this)">🤍</button>
+        <span style="filter:drop-shadow(0 4px 16px rgba(0,196,122,.5))">📷</span>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">Sony</div>
+        <div class="pname">Alpha 7CR Full-Frame 61MP</div>
+        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.9 (312)</span></div>
+        <div class="pfoot">
+          <div class="pprice"><span class="old">499 990 ₸</span>449 990 ₸</div>
+          <button class="btn-add" onclick="add(this,'Sony Alpha 7CR')">В корзину</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROMO BANNERS -->
+<div class="promos">
+  <div class="promo pr1" onclick="showToast('🍎 Apple — скидки до 40%!')">
+    <div class="ptag">⚡ Мегаскидка</div>
+    <div class="ptitle">До −40%<br>на Apple</div>
+    <div class="pdesc">Только до конца месяца!</div>
+    <div class="pcta">Смотреть →</div>
+  </div>
+  <div class="promo pr2" onclick="showToast('🎧 Наушники — лучшие цены!')">
+    <div class="ptag">🎵 Для звука</div>
+    <div class="ptitle">Топ наушники<br>от 14 990 ₸</div>
+    <div class="pdesc">Sony, JBL, Bose, Apple</div>
+    <div class="pcta">В каталог →</div>
+  </div>
+  <div class="promo pr3" onclick="showToast('🎮 Игровые устройства!')">
+    <div class="ptag">🎮 Геймерам</div>
+    <div class="ptitle">Игровой<br>уголок 2025</div>
+    <div class="pdesc">PS5, Xbox, мониторы</div>
+    <div class="pcta">Подробнее →</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section>
+  <div class="sec-head"><h2 class="sec-title">Почему выбирают нас</h2></div>
+  <div class="feats">
+    <div class="feat"><span class="feat-ico">🚀</span><div><div class="ftitle">Быстрая доставка</div><div class="fdesc">1–2 дня по Казахстану. Экспресс за 4 часа в Алматы.</div></div></div>
+    <div class="feat"><span class="feat-ico">🛡️</span><div><div class="ftitle">Гарантия 2 года</div><div class="fdesc">Официальная гарантия на все товары. Сервисные центры.</div></div></div>
+    <div class="feat"><span class="feat-ico">💳</span><div><div class="ftitle">Рассрочка 0%</div><div class="fdesc">До 24 месяцев без переплат. Одобрение за 5 минут.</div></div></div>
+    <div class="feat"><span class="feat-ico">🔄</span><div><div class="ftitle">Возврат 30 дней</div><div class="fdesc">Вернём деньги без лишних вопросов.</div></div></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div>
+    <div class="nl-title"><span>Скидка 10%</span> за подписку!</div>
+    <div class="nl-desc">Получайте акции и новинки первыми на email</div>
+  </div>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="Ваш email" id="emailIn">
+    <button class="nl-btn" onclick="subscribe()">Подписаться 🎁</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">Neo⚡Tech</div>
+  <div class="flinks">
+    <a href="#">О нас</a><a href="#">Доставка</a>
+    <a href="#">Гарантия</a><a href="#">Контакты</a><a href="#">Вакансии</a>
+  </div>
+  <div class="fcopy">© 2025 NeoTech. Все права защищены.</div>
+</footer>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
