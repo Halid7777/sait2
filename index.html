@@ -1,269 +1,562 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeoTech — Магазин электроники</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>TechZone — Электроника нового поколения</title>
+  <meta name="description" content="TechZone — лучший выбор электроники: смартфоны, ноутбуки, аудиотехника, умные устройства. Доставка по всему Казахстану." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <nav class="nav">
-    <div class="logo">Neo⚡Tech</div>
-    <ul class="nav-links">
-      <li><a href="#">Каталог</a></li>
-      <li><a href="#">Акции</a></li>
-      <li><a href="#">Бренды</a></li>
-      <li><a href="#">Контакты</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button class="btn-cart" onclick="openCart()">
-        🛒 Корзина <span class="cart-badge" id="cnt">0</span>
+<!-- ──────────────── HEADER ──────────────── -->
+<header class="header" id="home">
+  <div class="header__top">
+    <div class="container header__top-inner">
+      <div class="header__geo" id="geoBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <span id="geoText">Определить город</span>
+      </div>
+      <nav class="header__subnav">
+        <a href="#promotions">Акции</a>
+        <a href="#brands">Бренды</a>
+        <a href="#contacts">Контакты</a>
+        <a href="#license">Лицензия</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container header__main">
+    <a href="#home" class="logo">
+      <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="10" fill="var(--accent)"/>
+        <path d="M8 28 L14 12 L20 24 L26 16 L32 28" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="20" cy="10" r="3" fill="white"/>
+      </svg>
+      <span class="logo__text">TechZone</span>
+    </a>
+
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Поиск смартфонов, ноутбуков, TV…" autocomplete="off" />
+      <button class="search-bar__btn" id="searchBtn">Найти</button>
+    </div>
+
+    <div class="header__actions">
+      <button class="icon-btn" id="searchToggleMobile" aria-label="Поиск" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
-      <button class="hamburger" onclick="showToast('📋 Каталог · Акции · Бренды · Контакты')">
-        <span></span><span></span><span></span>
+      <button class="icon-btn" id="cartToggle" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+      <button class="icon-btn" id="wishToggle" aria-label="Избранное">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge badge--red" id="wishBadge" style="display:none">0</span>
       </button>
     </div>
+  </div>
+
+  <nav class="header__nav container">
+    <a href="#catalog" class="nav-link active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Каталог
+    </a>
+    <a href="#" class="nav-link" data-cat="smartphones">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      Смартфоны
+    </a>
+    <a href="#" class="nav-link" data-cat="laptops">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Ноутбуки
+    </a>
+    <a href="#" class="nav-link" data-cat="audio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      Аудио
+    </a>
+    <a href="#" class="nav-link" data-cat="tv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+      Телевизоры
+    </a>
+    <a href="#" class="nav-link" data-cat="smart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      Умный дом
+    </a>
+    <a href="#" class="nav-link" data-cat="accessories">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Аксессуары
+    </a>
   </nav>
 </header>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="blob b1"></div><div class="blob b2"></div>
-  <div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div>
-  <div class="hero-content">
-    <div class="hero-pill"><span class="pill-dot"></span>🔥 Распродажа — до −50%</div>
-    <h1>Лучшая<br><span class="g1">электроника</span><br><span class="g2">вашей жизни</span></h1>
-    <p class="hero-desc">Смартфоны, ноутбуки, гаджеты. Оригинальная техника с доставкой по всему Казахстану.</p>
-    <div class="hero-btns">
-      <button class="btn-main" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Смотреть каталог</button>
-      <button class="btn-ghost" onclick="showToast('📦 Акции обновляются каждую пятницу!')">Все акции →</button>
+<!-- ──────────────── HERO ──────────────── -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__eyebrow">Новинки 2025</p>
+      <h1 class="hero__title">Технологии<br/>на шаг<br/><em>впереди</em></h1>
+      <p class="hero__sub">Флагманские смартфоны, ультратонкие ноутбуки и умная электроника — всё в одном месте с быстрой доставкой.</p>
+      <div class="hero__btns">
+        <a href="#catalog" class="btn btn--primary">Смотреть каталог</a>
+        <a href="#promotions" class="btn btn--ghost">Акции дня</a>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="hstat"><div class="num">12K+</div><div class="lbl">товаров</div></div>
-      <div class="hstat"><div class="num">98%</div><div class="lbl">довольных</div></div>
-      <div class="hstat"><div class="num">1–2</div><div class="lbl">дня доставки</div></div>
+    <div class="hero__visual">
+      <div class="hero__phone-mock">
+        <svg viewBox="0 0 220 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="200" height="400" rx="32" fill="#0f0f14" stroke="#2a2a3a" stroke-width="2"/>
+          <rect x="20" y="20" width="180" height="380" rx="26" fill="#141420"/>
+          <rect x="85" y="14" width="50" height="6" rx="3" fill="#1e1e2e"/>
+          <rect x="30" y="50" width="160" height="100" rx="12" fill="#1a1a2e"/>
+          <circle cx="65" cy="100" r="28" fill="var(--accent)" opacity=".2"/>
+          <circle cx="65" cy="100" r="18" fill="var(--accent)" opacity=".4"/>
+          <circle cx="65" cy="100" r="10" fill="var(--accent)"/>
+          <rect x="105" y="80" width="80" height="8" rx="4" fill="#2a2a3a"/>
+          <rect x="105" y="96" width="55" height="6" rx="3" fill="#222230"/>
+          <rect x="105" y="110" width="65" height="6" rx="3" fill="#222230"/>
+          <rect x="30" y="165" width="75" height="75" rx="10" fill="#1a1a2e"/>
+          <rect x="115" y="165" width="75" height="75" rx="10" fill="#1a1a2e"/>
+          <circle cx="67" cy="202" r="20" fill="#222230"/>
+          <path d="M58 202 L72 195 L72 209 Z" fill="var(--accent)"/>
+          <circle cx="152" cy="202" r="20" fill="#222230"/>
+          <path d="M146 196 L158 196 L158 208 L146 208 Z" fill="var(--accent2)" stroke="none"/>
+          <rect x="30" y="250" width="160" height="6" rx="3" fill="#1e1e2e"/>
+          <rect x="30" y="264" width="130" height="6" rx="3" fill="#1e1e2e"/>
+          <rect x="30" y="278" width="145" height="6" rx="3" fill="#1e1e2e"/>
+          <rect x="30" y="310" width="70" height="28" rx="14" fill="var(--accent)"/>
+          <rect x="110" y="310" width="80" height="28" rx="14" fill="#1e1e2e" stroke="#2a2a3a" stroke-width="1"/>
+          <circle cx="50" cy="380" r="5" fill="#2a2a3a"/>
+          <rect x="90" y="376" width="40" height="8" rx="4" fill="#2a2a3a"/>
+          <circle cx="170" cy="380" r="5" fill="#2a2a3a"/>
+        </svg>
+        <div class="hero__glow"></div>
+      </div>
     </div>
   </div>
-  <div class="hero-img-wrap">
-    <div class="hero-emoji">📱</div>
-  </div>
-</div>
-
-<!-- BRANDS -->
-<section>
-  <div class="sec-head"><h2 class="sec-title">Популярные бренды</h2></div>
-  <div class="brands-row">
-    <div class="bc" onclick="showToast('Samsung — 284 товара')">📱 Samsung</div>
-    <div class="bc" onclick="showToast('Apple — 196 товаров')"> Apple</div>
-    <div class="bc" onclick="showToast('Sony — 142 товара')">🎧 Sony</div>
-    <div class="bc" onclick="showToast('Xiaomi — 310 товаров')">📡 Xiaomi</div>
-    <div class="bc" onclick="showToast('JBL — 88 товаров')">🔊 JBL</div>
-    <div class="bc" onclick="showToast('ASUS — 76 товаров')">💻 ASUS</div>
-    <div class="bc" onclick="showToast('Huawei — 95 товаров')">🌐 Huawei</div>
-  </div>
-</section>
-
-<!-- CATEGORIES -->
-<section>
-  <div class="sec-head"><h2 class="sec-title">Категории</h2><p class="sec-sub">Найдите нужное быстро</p></div>
-  <div class="cats">
-    <div class="cat" onclick="showToast('📱 Смартфоны — 284 товара')">
-      <div class="cat-ico" style="background:#fff5ee">📱</div>
-      <div class="cat-nm">Смартфоны</div><div class="cat-cnt">284 товара</div>
-    </div>
-    <div class="cat" onclick="showToast('💻 Ноутбуки — 156 товаров')">
-      <div class="cat-ico" style="background:#fdf0f8">💻</div>
-      <div class="cat-nm">Ноутбуки</div><div class="cat-cnt">156 товаров</div>
-    </div>
-    <div class="cat" onclick="showToast('🎧 Наушники — 320 товаров')">
-      <div class="cat-ico" style="background:#f5f0ff">🎧</div>
-      <div class="cat-nm">Наушники</div><div class="cat-cnt">320 товаров</div>
-    </div>
-    <div class="cat" onclick="showToast('📟 Планшеты — 98 товаров')">
-      <div class="cat-ico" style="background:#f0fcff">📟</div>
-      <div class="cat-nm">Планшеты</div><div class="cat-cnt">98 товаров</div>
-    </div>
-    <div class="cat" onclick="showToast('⌚ Умные часы — 77 товаров')">
-      <div class="cat-ico" style="background:#f0fff8">⌚</div>
-      <div class="cat-nm">Умные часы</div><div class="cat-cnt">77 товаров</div>
-    </div>
-    <div class="cat" onclick="showToast('🔌 Аксессуары — 512 товаров')">
-      <div class="cat-ico" style="background:#fffdf0">🔌</div>
-      <div class="cat-nm">Аксессуары</div><div class="cat-cnt">512 товаров</div>
-    </div>
+  <div class="hero__stats container">
+    <div class="stat"><span class="stat__num">12 000+</span><span class="stat__label">товаров</span></div>
+    <div class="stat"><span class="stat__num">150+</span><span class="stat__label">брендов</span></div>
+    <div class="stat"><span class="stat__num">24/7</span><span class="stat__label">поддержка</span></div>
+    <div class="stat"><span class="stat__num">99%</span><span class="stat__label">довольных</span></div>
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="catalog">
-  <div class="sec-head"><h2 class="sec-title">🔥 Хиты продаж</h2><p class="sec-sub">Самое популярное этой недели</p></div>
-  <div class="products">
-
-    <div class="pcard po">
-      <div class="pimg" style="background:linear-gradient(135deg,#fff5ee,#ffe0cc)">
-        <span class="pbadge hot">HOT</span>
-        <button class="pfav" onclick="fav(this)">🤍</button>
-        <span style="filter:drop-shadow(0 4px 16px rgba(255,107,0,.4))">📱</span>
+<!-- ──────────────── PROMOTIONS ──────────────── -->
+<section class="section" id="promotions">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title">Акции и скидки</h2>
+      <span class="section__tag">Горящие предложения</span>
+    </div>
+    <div class="promo-grid">
+      <div class="promo-card promo-card--big" style="--pc:var(--accent)">
+        <div class="promo-card__badge">−40%</div>
+        <div class="promo-card__info">
+          <p class="promo-card__label">Только до конца месяца</p>
+          <h3>Смартфоны Samsung Galaxy</h3>
+          <p>Флагманская линейка по невероятной цене</p>
+          <a href="#catalog" class="btn btn--primary btn--sm">Смотреть</a>
+        </div>
+        <div class="promo-card__deco">
+          <svg viewBox="0 0 120 200" fill="none"><rect x="10" y="5" width="100" height="190" rx="20" fill="white" opacity=".07"/><rect x="18" y="14" width="84" height="172" rx="14" fill="white" opacity=".05"/><circle cx="60" cy="98" r="35" fill="white" opacity=".06"/></svg>
+        </div>
       </div>
-      <div class="pinfo">
-        <div class="pbrand">Samsung</div>
-        <div class="pname">Galaxy S25 Ultra 512GB</div>
-        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.9 (1.2k)</span></div>
-        <div class="pfoot">
-          <div class="pprice"><span class="old">129 990 ₸</span>119 990 ₸</div>
-          <button class="btn-add" onclick="add(this,'Galaxy S25 Ultra')">В корзину</button>
+      <div class="promo-card" style="--pc:#7c3aed">
+        <div class="promo-card__badge">−25%</div>
+        <div class="promo-card__info">
+          <p class="promo-card__label">Весенняя распродажа</p>
+          <h3>Ноутбуки ASUS</h3>
+          <p>Мощность и стиль</p>
+          <a href="#catalog" class="btn btn--ghost btn--sm">Выбрать</a>
+        </div>
+      </div>
+      <div class="promo-card" style="--pc:#059669">
+        <div class="promo-card__badge">−15%</div>
+        <div class="promo-card__info">
+          <p class="promo-card__label">Weekender deal</p>
+          <h3>Наушники Sony</h3>
+          <p>Звук без компромиссов</p>
+          <a href="#catalog" class="btn btn--ghost btn--sm">Выбрать</a>
+        </div>
+      </div>
+      <div class="promo-card" style="--pc:#dc2626">
+        <div class="promo-card__badge">−30%</div>
+        <div class="promo-card__info">
+          <p class="promo-card__label">Flash sale</p>
+          <h3>Apple Watch</h3>
+          <p>Умные часы на запястье</p>
+          <a href="#catalog" class="btn btn--ghost btn--sm">Выбрать</a>
         </div>
       </div>
     </div>
-
-    <div class="pcard pp">
-      <div class="pimg" style="background:linear-gradient(135deg,#fff0f7,#ffd0e8)">
-        <span class="pbadge newb">NEW</span>
-        <button class="pfav" onclick="fav(this)">🤍</button>
-        <span style="filter:drop-shadow(0 4px 16px rgba(255,45,120,.4))">💻</span>
-      </div>
-      <div class="pinfo">
-        <div class="pbrand">Apple</div>
-        <div class="pname">MacBook Air M4 13" 16GB</div>
-        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">5.0 (876)</span></div>
-        <div class="pfoot">
-          <div class="pprice">189 990 ₸</div>
-          <button class="btn-add" onclick="add(this,'MacBook Air M4')">В корзину</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard pv">
-      <div class="pimg" style="background:linear-gradient(135deg,#f5f0ff,#e0d0ff)">
-        <span class="pbadge sale">−20%</span>
-        <button class="pfav" onclick="fav(this)">🤍</button>
-        <span style="filter:drop-shadow(0 4px 16px rgba(124,58,237,.45))">🎧</span>
-      </div>
-      <div class="pinfo">
-        <div class="pbrand">Sony</div>
-        <div class="pname">WH-1000XM6 Wireless</div>
-        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.8 (3.4k)</span></div>
-        <div class="pfoot">
-          <div class="pprice"><span class="old">89 990 ₸</span>71 990 ₸</div>
-          <button class="btn-add" onclick="add(this,'Sony WH-1000XM6')">В корзину</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard pc">
-      <div class="pimg" style="background:linear-gradient(135deg,#f0fcff,#c8f4ff)">
-        <button class="pfav" onclick="fav(this)">🤍</button>
-        <span style="filter:drop-shadow(0 4px 16px rgba(0,200,224,.5))">⌚</span>
-      </div>
-      <div class="pinfo">
-        <div class="pbrand">Apple</div>
-        <div class="pname">Watch Ultra 3 Titanium</div>
-        <div class="prating"><span class="stars">★★★★☆</span><span class="rnum">4.7 (654)</span></div>
-        <div class="pfoot">
-          <div class="pprice">149 990 ₸</div>
-          <button class="btn-add" onclick="add(this,'Apple Watch Ultra 3')">В корзину</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard py">
-      <div class="pimg" style="background:linear-gradient(135deg,#fff8e0,#ffeda0)">
-        <span class="pbadge hot">HOT</span>
-        <button class="pfav" onclick="fav(this)">🤍</button>
-        <span style="filter:drop-shadow(0 4px 16px rgba(255,208,0,.6))">🎮</span>
-      </div>
-      <div class="pinfo">
-        <div class="pbrand">PlayStation</div>
-        <div class="pname">PS5 Pro 2TB Digital Ed.</div>
-        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.9 (2.1k)</span></div>
-        <div class="pfoot">
-          <div class="pprice">239 990 ₸</div>
-          <button class="btn-add" onclick="add(this,'PS5 Pro')">В корзину</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard pg">
-      <div class="pimg" style="background:linear-gradient(135deg,#f0fff8,#c8ffe8)">
-        <span class="pbadge newb">NEW</span>
-        <button class="pfav" onclick="fav(this)">🤍</button>
-        <span style="filter:drop-shadow(0 4px 16px rgba(0,196,122,.5))">📷</span>
-      </div>
-      <div class="pinfo">
-        <div class="pbrand">Sony</div>
-        <div class="pname">Alpha 7CR Full-Frame 61MP</div>
-        <div class="prating"><span class="stars">★★★★★</span><span class="rnum">4.9 (312)</span></div>
-        <div class="pfoot">
-          <div class="pprice"><span class="old">499 990 ₸</span>449 990 ₸</div>
-          <button class="btn-add" onclick="add(this,'Sony Alpha 7CR')">В корзину</button>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- PROMO BANNERS -->
-<div class="promos">
-  <div class="promo pr1" onclick="showToast('🍎 Apple — скидки до 40%!')">
-    <div class="ptag">⚡ Мегаскидка</div>
-    <div class="ptitle">До −40%<br>на Apple</div>
-    <div class="pdesc">Только до конца месяца!</div>
-    <div class="pcta">Смотреть →</div>
-  </div>
-  <div class="promo pr2" onclick="showToast('🎧 Наушники — лучшие цены!')">
-    <div class="ptag">🎵 Для звука</div>
-    <div class="ptitle">Топ наушники<br>от 14 990 ₸</div>
-    <div class="pdesc">Sony, JBL, Bose, Apple</div>
-    <div class="pcta">В каталог →</div>
-  </div>
-  <div class="promo pr3" onclick="showToast('🎮 Игровые устройства!')">
-    <div class="ptag">🎮 Геймерам</div>
-    <div class="ptitle">Игровой<br>уголок 2025</div>
-    <div class="pdesc">PS5, Xbox, мониторы</div>
-    <div class="pcta">Подробнее →</div>
-  </div>
-</div>
+<!-- ──────────────── CATALOG ──────────────── -->
+<section class="section" id="catalog">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title">Каталог товаров</h2>
+      <div class="catalog__filters">
+        <button class="filter-btn active" data-filter="all">Все</button>
+        <button class="filter-btn" data-filter="smartphones">Смартфоны</button>
+        <button class="filter-btn" data-filter="laptops">Ноутбуки</button>
+        <button class="filter-btn" data-filter="audio">Аудио</button>
+        <button class="filter-btn" data-filter="tv">TV</button>
+        <button class="filter-btn" data-filter="smart">Умный дом</button>
+        <button class="filter-btn" data-filter="accessories">Аксессуары</button>
+      </div>
+    </div>
 
-<!-- FEATURES -->
-<section>
-  <div class="sec-head"><h2 class="sec-title">Почему выбирают нас</h2></div>
-  <div class="feats">
-    <div class="feat"><span class="feat-ico">🚀</span><div><div class="ftitle">Быстрая доставка</div><div class="fdesc">1–2 дня по Казахстану. Экспресс за 4 часа в Алматы.</div></div></div>
-    <div class="feat"><span class="feat-ico">🛡️</span><div><div class="ftitle">Гарантия 2 года</div><div class="fdesc">Официальная гарантия на все товары. Сервисные центры.</div></div></div>
-    <div class="feat"><span class="feat-ico">💳</span><div><div class="ftitle">Рассрочка 0%</div><div class="fdesc">До 24 месяцев без переплат. Одобрение за 5 минут.</div></div></div>
-    <div class="feat"><span class="feat-ico">🔄</span><div><div class="ftitle">Возврат 30 дней</div><div class="fdesc">Вернём деньги без лишних вопросов.</div></div></div>
+    <div class="sort-bar">
+      <span class="sort-bar__count" id="productCount">Загрузка…</span>
+      <select id="sortSelect" class="sort-select">
+        <option value="default">По умолчанию</option>
+        <option value="price-asc">Цена ↑</option>
+        <option value="price-desc">Цена ↓</option>
+        <option value="rating">По рейтингу</option>
+        <option value="name">По названию</option>
+      </select>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="load-more-wrap">
+      <button class="btn btn--outline" id="loadMoreBtn">Показать ещё</button>
+    </div>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<div class="newsletter">
-  <div>
-    <div class="nl-title"><span>Скидка 10%</span> за подписку!</div>
-    <div class="nl-desc">Получайте акции и новинки первыми на email</div>
+<!-- ──────────────── BRANDS ──────────────── -->
+<section class="section section--dark" id="brands">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title">Официальные бренды</h2>
+      <p class="section__sub">Мы — авторизованный партнёр ведущих мировых производителей</p>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-card"><svg viewBox="0 0 80 30" fill="currentColor"><text x="0" y="22" font-size="18" font-weight="700" letter-spacing="-1">Apple</text></svg></div>
+      <div class="brand-card"><svg viewBox="0 0 100 30" fill="currentColor"><text x="0" y="22" font-size="16" font-weight="700">Samsung</text></svg></div>
+      <div class="brand-card"><svg viewBox="0 0 60 30" fill="currentColor"><text x="0" y="22" font-size="18" font-weight="700">Sony</text></svg></div>
+      <div class="brand-card"><svg viewBox="0 0 80 30" fill="currentColor"><text x="0" y="22" font-size="17" font-weight="700" letter-spacing="-0.5">Xiaomi</text></svg></div>
+      <div class="brand-card"><svg viewBox="0 0 80 30" fill="currentColor"><text x="0" y="22" font-size="18" font-weight="700">ASUS</text></svg></div>
+      <div class="brand-card"><svg viewBox="0 0 60 30" fill="currentColor"><text x="0" y="22" font-size="17" font-weight="700">LG</text></svg></div>
+      <div class="brand-card"><svg viewBox="0 0 100 30" fill="currentColor"><text x="0" y="22" font-size="15" font-weight="700" letter-spacing="1">Huawei</text></svg></div>
+      <div class="brand-card"><svg viewBox="0 0 80 30" fill="currentColor"><text x="0" y="22" font-size="16" font-weight="700">Lenovo</text></svg></div>
+    </div>
   </div>
-  <div class="nl-form">
-    <input class="nl-input" type="email" placeholder="Ваш email" id="emailIn">
-    <button class="nl-btn" onclick="subscribe()">Подписаться 🎁</button>
-  </div>
-</div>
+</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="fl">Neo⚡Tech</div>
-  <div class="flinks">
-    <a href="#">О нас</a><a href="#">Доставка</a>
-    <a href="#">Гарантия</a><a href="#">Контакты</a><a href="#">Вакансии</a>
+<!-- ──────────────── CONTACTS ──────────────── -->
+<section class="section" id="contacts">
+  <div class="container">
+    <div class="contacts-layout">
+      <div class="contacts__info">
+        <h2 class="section__title">Контакты</h2>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <p class="contact-item__label">Телефон</p>
+              <a href="tel:+77771234567" class="contact-item__val">+7 (777) 123-45-67</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p class="contact-item__label">Email</p>
+              <a href="mailto:info@techzone.kz" class="contact-item__val">info@techzone.kz</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+            <div>
+              <p class="contact-item__label">Адрес</p>
+              <p class="contact-item__val">Казахстан, г. Алматы<br/>ул. Абая, 150</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <p class="contact-item__label">Режим работы</p>
+              <p class="contact-item__val">Пн–Пт: 09:00–21:00<br/>Сб–Вс: 10:00–20:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <h3 class="contact-form__title">Написать нам</h3>
+        <div class="form-group">
+          <label for="cName">Имя</label>
+          <input type="text" id="cName" placeholder="Ваше имя" required />
+        </div>
+        <div class="form-group">
+          <label for="cEmail">Email</label>
+          <input type="email" id="cEmail" placeholder="email@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="cMsg">Сообщение</label>
+          <textarea id="cMsg" rows="4" placeholder="Ваш вопрос или предложение…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Отправить сообщение</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
   </div>
-  <div class="fcopy">© 2025 NeoTech. Все права защищены.</div>
+</section>
+
+<!-- ──────────────── LICENSE ──────────────── -->
+<section class="section section--muted" id="license">
+  <div class="container">
+    <h2 class="section__title">Лицензия и документы</h2>
+    <div class="license-grid">
+      <div class="license-card">
+        <svg class="license-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <h4>Свидетельство о регистрации</h4>
+        <p>ИП «TechZone», БИН: 240140012345. Зарегистрировано в МЮ РК.</p>
+        <a href="#" class="link">Скачать PDF</a>
+      </div>
+      <div class="license-card">
+        <svg class="license-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <h4>Политика конфиденциальности</h4>
+        <p>Мы соблюдаем законодательство РК о персональных данных и не передаём данные третьим лицам.</p>
+        <a href="#" class="link">Читать документ</a>
+      </div>
+      <div class="license-card">
+        <svg class="license-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h4>Гарантийные обязательства</h4>
+        <p>На весь товар действует официальная гарантия производителя от 12 до 24 месяцев.</p>
+        <a href="#" class="link">Условия гарантии</a>
+      </div>
+      <div class="license-card">
+        <svg class="license-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <h4>Публичная оферта</h4>
+        <p>Оформляя заказ, вы принимаете условия публичной оферты интернет-магазина TechZone.</p>
+        <a href="#" class="link">Текст оферты</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="#home" class="logo">
+        <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="10" fill="var(--accent)"/>
+          <path d="M8 28 L14 12 L20 24 L26 16 L32 28" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="20" cy="10" r="3" fill="white"/>
+        </svg>
+        <span class="logo__text">TechZone</span>
+      </a>
+      <p>Электроника нового поколения. Официальный дилер мировых брендов в Казахстане.</p>
+      <div class="footer__socials">
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 5L2 12.5l7 1M21 5l-2.5 15L9 13.5M21 5L9 13.5m0 0V19l3.25-3"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer__links">
+      <div class="footer__col">
+        <h5>Каталог</h5>
+        <a href="#">Смартфоны</a>
+        <a href="#">Ноутбуки</a>
+        <a href="#">Планшеты</a>
+        <a href="#">Аудио</a>
+        <a href="#">Телевизоры</a>
+        <a href="#">Умный дом</a>
+      </div>
+      <div class="footer__col">
+        <h5>Покупателям</h5>
+        <a href="#">Доставка и оплата</a>
+        <a href="#">Возврат товара</a>
+        <a href="#">Гарантия</a>
+        <a href="#">Отслеживание</a>
+        <a href="#">Бонусы</a>
+      </div>
+      <div class="footer__col">
+        <h5>Компания</h5>
+        <a href="#contacts">О нас</a>
+        <a href="#brands">Бренды</a>
+        <a href="#promotions">Акции</a>
+        <a href="#license">Документы</a>
+        <a href="#">Вакансии</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom container">
+    <p>© 2025 TechZone. Все права защищены.</p>
+    <div class="footer__bottom-links">
+      <a href="#license">Публичная оферта</a>
+      <a href="#license">Конфиденциальность</a>
+    </div>
+  </div>
 </footer>
 
-<div id="toast"></div>
+<!-- ──────────────── CART DRAWER ──────────────── -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer__head">
+    <h3>Корзина</h3>
+    <button class="icon-btn" id="cartClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-drawer__body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="var(--border)" stroke-width="2"/><path d="M25 30h30l-4 18H29L25 30z" stroke="var(--text-muted)" stroke-width="1.5" stroke-linejoin="round"/><path d="M22 26h5l4 4" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/><circle cx="32" cy="52" r="2" fill="var(--text-muted)"/><circle cx="46" cy="52" r="2" fill="var(--text-muted)"/></svg>
+      <p>Корзина пуста</p>
+      <a href="#catalog" class="btn btn--primary btn--sm" id="goShop">Перейти в каталог</a>
+    </div>
+    <ul class="cart-list" id="cartList"></ul>
+  </div>
+  <div class="cart-drawer__foot" id="cartFoot" style="display:none">
+    <div class="cart-total">
+      <span>Итого:</span>
+      <strong id="cartTotal">0 ₸</strong>
+    </div>
+    <button class="btn btn--primary btn--full" id="checkoutBtn">Оформить заказ</button>
+  </div>
+</aside>
+
+<!-- ──────────────── WISHLIST DRAWER ──────────────── -->
+<div class="cart-overlay" id="wishOverlay"></div>
+<aside class="cart-drawer" id="wishDrawer">
+  <div class="cart-drawer__head">
+    <h3>Избранное</h3>
+    <button class="icon-btn" id="wishClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-drawer__body" id="wishBody">
+    <div class="cart-empty" id="wishEmpty">
+      <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="var(--border)" stroke-width="2"/><path d="M55.84 24.61a5.5 5.5 0 0 0-7.78 0L40 32.67l-8.06-8.06a5.5 5.5 0 0 0-7.78 7.78l8.06 8.06L40 48.23l7.78-7.78 8.06-8.06a5.5 5.5 0 0 0 0-7.78z" stroke="var(--text-muted)" stroke-width="1.5" fill="none"/></svg>
+      <p>Список желаний пуст</p>
+      <a href="#catalog" class="btn btn--primary btn--sm" id="goShopWish">Перейти в каталог</a>
+    </div>
+    <ul class="cart-list" id="wishList"></ul>
+  </div>
+</aside>
+
+<!-- ──────────────── CHECKOUT MODAL ──────────────── -->
+<div class="modal-overlay" id="checkoutOverlay" style="display:none">
+  <div class="modal modal--checkout" id="checkoutModal">
+    <button class="modal__close" id="checkoutClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal__icon">
+      <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="var(--accent)" opacity=".1"/><path d="M14 24l8 8 12-12" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h3>Оформление заказа</h3>
+    <p id="checkoutSummary">Итого: 0 ₸</p>
+    <div class="checkout-form">
+      <div class="checkout-field">
+        <label>Имя</label>
+        <input type="text" id="checkoutName" placeholder="Ваше имя" autocomplete="name" />
+      </div>
+      <div class="checkout-field">
+        <label>Номер телефона</label>
+        <input type="tel" id="checkoutPhone" placeholder="+7 (___) ___-__-__" autocomplete="tel" />
+      </div>
+      <div class="checkout-field">
+        <label>Адрес доставки</label>
+        <textarea id="checkoutAddress" rows="2" placeholder="Город, улица, дом, квартира" autocomplete="street-address"></textarea>
+      </div>
+      <div class="checkout-field">
+        <label>Комментарий <span style="color:var(--text-dim)">(необязательно)</span></label>
+        <textarea id="checkoutComment" rows="2" placeholder="Удобное время доставки, пожелания..."></textarea>
+      </div>
+    </div>
+    <button class="btn btn--primary btn--full" id="confirmCheckout">Подтвердить заказ</button>
+  </div>
+</div>
+
+<!-- ──────────────── GEO MODAL ──────────────── -->
+<div class="modal-overlay" id="geoOverlay" style="display:none">
+  <div class="modal" id="geoModal">
+    <button class="modal__close" id="geoClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal__icon">
+      <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="var(--accent)" opacity=".1"/><path d="M24 8C17.37 8 12 13.37 12 20c0 9 12 22 12 22s12-13 12-22c0-6.63-5.37-12-12-12z" stroke="var(--accent)" stroke-width="2"/><circle cx="24" cy="20" r="4" stroke="var(--accent)" stroke-width="2"/></svg>
+    </div>
+    <h3>Ваш город</h3>
+    <p id="geoResult">Определяем местоположение…</p>
+    <div class="city-list" id="cityList">
+      <button class="city-btn" data-city="Алматы">Алматы</button>
+      <button class="city-btn" data-city="Астана">Астана</button>
+      <button class="city-btn" data-city="Шымкент">Шымкент</button>
+      <button class="city-btn" data-city="Атырау">Атырау</button>
+      <button class="city-btn" data-city="Уральск">Уральск</button>
+      <button class="city-btn" data-city="Актобе">Актобе</button>
+      <button class="city-btn" data-city="Павлодар">Павлодар</button>
+      <button class="city-btn" data-city="Семей">Семей</button>
+    </div>
+    <button class="btn btn--primary btn--full" id="confirmGeo">Подтвердить</button>
+  </div>
+</div>
+
+<!-- ──────────────── MOBILE SEARCH OVERLAY ──────────────── -->
+<div class="mobile-search-overlay" id="mobileSearchOverlay">
+  <div class="mobile-search-inner">
+    <div class="mobile-search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="mobileSearchInput" placeholder="Поиск товаров…" autocomplete="off" />
+      <button id="mobileSearchClear" aria-label="Очистить">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <button class="btn btn--ghost btn--sm" id="mobileSearchCancel">Отмена</button>
+  </div>
+</div>
+
+<!-- ──────────────── MOBILE BOTTOM NAV ──────────────── -->
+<nav class="bottom-nav" id="bottomNav">
+  <a href="#home" class="bottom-nav__item active" data-section="home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Главная</span>
+  </a>
+  <a href="#catalog" class="bottom-nav__item" data-section="catalog">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    <span>Каталог</span>
+  </a>
+  <button class="bottom-nav__item bottom-nav__item--cart" id="bottomCartBtn" aria-label="Корзина">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="badge" id="cartBadgeMobile">0</span>
+    <span>Корзина</span>
+  </button>
+  <button class="bottom-nav__item" id="bottomWishBtn" aria-label="Избранное">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <span class="badge badge--red" id="wishBadgeMobile" style="display:none">0</span>
+    <span>Избранное</span>
+  </button>
+  <a href="#contacts" class="bottom-nav__item" data-section="contacts">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>Контакты</span>
+  </a>
+</nav>
+
+<!-- ──────────────── TOAST ──────────────── -->
+<div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
 </body>
